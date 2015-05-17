@@ -61,7 +61,7 @@ head(activity)
 ```r
 step_total <- activity %>%  
        group_by(date)%>%  
-       summarize(total_steps = sum(steps, na.rm = TRUE))  
+       summarize(total_steps = sum(steps))  
 head(step_total)
 ```
 
@@ -69,7 +69,7 @@ head(step_total)
 ## Source: local data frame [6 x 2]
 ## 
 ##         date total_steps
-## 1 2012-10-01           0
+## 1 2012-10-01          NA
 ## 2 2012-10-02         126
 ## 3 2012-10-03       11352
 ## 4 2012-10-04       12116
@@ -92,19 +92,19 @@ ggplot(data = step_total, aes(x = total_steps))+
 3. Calculating mean and median of total number of steps taken per day  
 
 ```r
-mean(step_total$total_steps, na.rm = TRUE)  
+round(mean(step_total$total_steps, na.rm = TRUE),0)
 ```
 
 ```
-## [1] 9354.23
+## [1] 10766
 ```
 
 ```r
-median(step_total$total_steps, na.rm = TRUE)  
+round(median(step_total$total_steps, na.rm = TRUE),0)
 ```
 
 ```
-## [1] 10395
+## [1] 10765
 ```
 **Part 2 - Average daily activity pattern**  
 
@@ -170,19 +170,6 @@ activity$steps[i]=by_interval$avg_steps[which(by_interval$interval==activity$int
 step_total <- activity %>%
     group_by(date)%>%
     summarize(total_steps = sum(steps))   
- head(step_total)  
-```
-
-```
-## Source: local data frame [6 x 2]
-## 
-##         date total_steps
-## 1 2012-10-01    10766.19
-## 2 2012-10-02      126.00
-## 3 2012-10-03    11352.00
-## 4 2012-10-04    12116.00
-## 5 2012-10-05    13294.00
-## 6 2012-10-06    15420.00
 ```
 3. (a) Histogram of total number of steps taken each day
 
@@ -198,21 +185,21 @@ ggplot(data = step_total, aes(x = total_steps))+
 3. (b) Mean and median total number of steps taken per day calculated below.  
 
 ```r
-mean(step_total$total_steps)  
+round(mean(step_total$total_steps),0)
 ```
 
 ```
-## [1] 10766.19
+## [1] 10766
 ```
 
 ```r
-median(step_total$total_steps)  
+round(median(step_total$total_steps),0)
 ```
 
 ```
-## [1] 10766.19
+## [1] 10766
 ```
-From the calculations, the new dataset mean is similar as in Part 1 without imputing missing values - no impact. The median has changed to a same value with the mean - creating a more even distribution - the skew of the dataset has been reduced.
+From the calculations, the new dataset mean and median are is similar as in Part 1 without imputing missing values - no impact. 
 
 **Part 4 - Differences in patterns between weekdays and weekends**  
 
@@ -232,12 +219,12 @@ head(by_interval)
 ## Groups: interval
 ## 
 ##   interval     day  avg_steps           interval2
-## 1     0000 weekday 2.25115304 2015-05-16 00:00:00
-## 2     0000 weekend 0.21462264 2015-05-16 00:00:00
-## 3     0005 weekday 0.44528302 2015-05-16 00:05:00
-## 4     0005 weekend 0.04245283 2015-05-16 00:05:00
-## 5     0010 weekday 0.17316562 2015-05-16 00:10:00
-## 6     0010 weekend 0.01650943 2015-05-16 00:10:00
+## 1     0000 weekday 2.25115304 2015-05-18 00:00:00
+## 2     0000 weekend 0.21462264 2015-05-18 00:00:00
+## 3     0005 weekday 0.44528302 2015-05-18 00:05:00
+## 4     0005 weekend 0.04245283 2015-05-18 00:05:00
+## 5     0010 weekday 0.17316562 2015-05-18 00:10:00
+## 6     0010 weekend 0.01650943 2015-05-18 00:10:00
 ```
 
 

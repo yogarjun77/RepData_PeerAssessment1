@@ -48,7 +48,7 @@ head(activity)
 ```{r part 1}
 step_total <- activity %>%  
        group_by(date)%>%  
-       summarize(total_steps = sum(steps, na.rm = TRUE))  
+       summarize(total_steps = sum(steps))  
 head(step_total)
 ```
 
@@ -63,9 +63,9 @@ ggplot(data = step_total, aes(x = total_steps))+
 
 3. Calculating mean and median of total number of steps taken per day  
 ```{r meanmedian 1}
-mean(step_total$total_steps, na.rm = TRUE)  
-median(step_total$total_steps, na.rm = TRUE)  
-```
+round(mean(step_total$total_steps, na.rm = TRUE),0)
+round(median(step_total$total_steps, na.rm = TRUE),0)
+```  
 **Part 2 - Average daily activity pattern**  
 
 1. Time series plot of 5-minute interval vs average number of steps taken(averaged across all days)
@@ -89,7 +89,7 @@ ggplot(by_interval, aes(x=interval2, y=avg_steps)) +
 
 ```{r maxsteps_1}  
 by_interval[(which(by_interval$avg_steps == max(by_interval$avg_steps), arr.ind = TRUE)),1]
-```
+```  
 
 **Part 3 - Imputing missing values**   
 1. Total number of missing values in the dataset
@@ -113,7 +113,6 @@ activity$steps[i]=by_interval$avg_steps[which(by_interval$interval==activity$int
 step_total <- activity %>%
     group_by(date)%>%
     summarize(total_steps = sum(steps))   
- head(step_total)  
 ```  
 3. (a) Histogram of total number of steps taken each day
 ```{r hist_2}  
@@ -125,10 +124,10 @@ ggplot(data = step_total, aes(x = total_steps))+
 
 3. (b) Mean and median total number of steps taken per day calculated below.  
 ```{r mean_median} 
-mean(step_total$total_steps)  
-median(step_total$total_steps)  
+round(mean(step_total$total_steps),0)
+round(median(step_total$total_steps),0)
 ```
-From the calculations, the new dataset mean is similar as in Part 1 without imputing missing values - no impact. The median has changed to a same value with the mean - creating a more even distribution - the skew of the dataset has been reduced.
+From the calculations, the new dataset mean and median are is similar as in Part 1 without imputing missing values - no impact. 
 
 **Part 4 - Differences in patterns between weekdays and weekends**  
 
