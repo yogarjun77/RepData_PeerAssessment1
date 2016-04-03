@@ -1,12 +1,12 @@
 
 **Title: "Reproducible Research: Peer Assessment 1"**  
 **Author: "yogarjun77"**  
-**Date: " May 16, 2015**   
+**Date: " April 04, 2016**   
   
 
 **Introduction**
 
-This assignment makes use of data from a personal activity monitoring device. This device collects data at 5 minute intervals through out the day. The data consists of two months of data from an anonymous individual collected during the months of October and November, 2012 (total 61 days) and include the number of steps taken in 5 minute intervals each day.
+This assignment makes use of data from a personal activity monitoring device. This device collects data at 5 minute intervals throughout the day. The data consists of two months of data from an anonymous individual collected during the months of October and November, 2012 (total 61 days) and include the number of steps taken in 5 minute intervals each day.
 
 The data for this assignment can be downloaded from here:
 
@@ -69,6 +69,7 @@ head(step_total)
 ## Source: local data frame [6 x 2]
 ## 
 ##         date total_steps
+##       (time)       (int)
 ## 1 2012-10-01          NA
 ## 2 2012-10-02         126
 ## 3 2012-10-03       11352
@@ -87,7 +88,11 @@ ggplot(data = step_total, aes(x = total_steps))+
    theme_bw()
 ```
 
-![plot of chunk histo1](figure/histo1-1.png) 
+```
+## Warning: Removed 8 rows containing non-finite values (stat_bin).
+```
+
+![plot of chunk histo1](figure/histo1-1.png)
 
 3. Calculating mean and median of total number of steps taken per day  
 
@@ -126,7 +131,7 @@ ggplot(by_interval, aes(x=interval2, y=avg_steps)) +
    theme_bw()  
 ```
 
-![plot of chunk average_daily_activity](figure/average_daily_activity-1.png) 
+![plot of chunk average_daily_activity](figure/average_daily_activity-1.png)
 
 2. 5-minute interval which contains the maximum number of steps
 
@@ -139,6 +144,7 @@ by_interval[(which(by_interval$avg_steps == max(by_interval$avg_steps), arr.ind 
 ## Source: local data frame [1 x 1]
 ## 
 ##   interval
+##      (chr)
 ## 1     0835
 ```
 
@@ -180,7 +186,7 @@ ggplot(data = step_total, aes(x = total_steps))+
    theme_bw()
 ```
 
-![plot of chunk hist_2](figure/hist_2-1.png) 
+![plot of chunk hist_2](figure/hist_2-1.png)
 
 3. (b) Mean and median total number of steps taken per day calculated below.  
 
@@ -216,15 +222,16 @@ head(by_interval)
 
 ```
 ## Source: local data frame [6 x 4]
-## Groups: interval
+## Groups: interval [3]
 ## 
 ##   interval     day  avg_steps           interval2
-## 1     0000 weekday 2.25115304 2015-05-18 00:00:00
-## 2     0000 weekend 0.21462264 2015-05-18 00:00:00
-## 3     0005 weekday 0.44528302 2015-05-18 00:05:00
-## 4     0005 weekend 0.04245283 2015-05-18 00:05:00
-## 5     0010 weekday 0.17316562 2015-05-18 00:10:00
-## 6     0010 weekend 0.01650943 2015-05-18 00:10:00
+##      (chr)   (chr)      (dbl)              (time)
+## 1     0000 weekday 2.25115304 2016-04-04 00:00:00
+## 2     0000 weekend 0.21462264 2016-04-04 00:00:00
+## 3     0005 weekday 0.44528302 2016-04-04 00:05:00
+## 4     0005 weekend 0.04245283 2016-04-04 00:05:00
+## 5     0010 weekday 0.17316562 2016-04-04 00:10:00
+## 6     0010 weekend 0.01650943 2016-04-04 00:10:00
 ```
 
 
@@ -238,7 +245,7 @@ ggplot(by_interval, aes(x=interval2, y=avg_steps))+ theme_bw() +
         scale_x_datetime(breaks =date_breaks("2 hour"), labels= date_format("%H:%M"))
 ```
 
-![plot of chunk plot_weekday_weekend](figure/plot_weekday_weekend-1.png) 
+![plot of chunk plot_weekday_weekend](figure/plot_weekday_weekend-1.png)
 
 **Remarks/Conclusion**
 The subject in this study shows significant movement above 200 steps around 8:35 am on weekdays possibly while going to work or maybe a morning jog. During weekends movement is more spread out along the day between 8am to 5pm.
